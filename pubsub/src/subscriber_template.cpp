@@ -33,47 +33,37 @@
  *********************************************************************/
 
 /* Authors: Abhinand A S
-   Desc:    Template for ROS publisher
+   Desc:    Template for ROS subscriber
 */
 
 #include "ros/ros.h"
 #include "std_msgs/String.h"
 #include "geometry_msgs/Point.h"
 
-int main(int argc, char **argv)
-{
-
-  ros::init(argc, argv, "publisher");
-
-  ros::NodeHandle n;
-
-  ros::Publisher string_pub = n.advertise<std_msgs::String>("pubsub/string", 1000);
-
-  ros::Publisher point_pub = n.advertise<geometry_msgs::Point>("pubsub/point", 1000);
-
-  ros::Rate loop_rate(10); //10 Hz
-
-  while (ros::ok()) {
+void stringCallback(const std_msgs::String::ConstPtr& msg) {
     
-    std_msgs::String msg;
-    geometry_msgs::Point point;
+    ROS_INFO("String: [%s]", msg->data.c_str());
+    
 
-
-    msg.data = "hello world";
-    point.x = 1.0;
-    point.y = 3.4;
-    point.z = 2.5;
-
-    string_pub.publish(msg);
-    point_pub.publish(point);
-
-    ROS_INFO("publishing ...");
-
-    ros::spinOnce();
-
-    loop_rate.sleep();
-  }
-
-  return 0;
 }
 
+void pointCallback(const geometry_msgs::Point::ConstPtr& point) {
+
+    ROS_INFO_STREAM("Point: x=" << point->x << "\ty=" << point->y << "\tz=" << point->z);    
+
+}
+
+int main(int argc, char **argv)
+{
+  
+    ros::init(argc, argv, "subscriber");
+
+    ros::NodeHandle n;
+
+    ros::Subscriber string_sub = n.subscribe("pubsub/string", 1000, stringCallback);
+    ros::Subscriber point_sub = n.subscribe("pubsub/point", 1000, pointCallback);
+
+    ros::spin();
+
+    return 0;
+}

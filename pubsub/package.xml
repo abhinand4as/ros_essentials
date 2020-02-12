@@ -4,7 +4,7 @@
   <name>pubsub</name>
   <version>0.0.1</version>
   <description>The pubsub package</description>
-  <maintainer email="abhinand4as@gmail.com">glt0056</maintainer>
+  <maintainer email="abhinand4as@gmail.com">Abhinand A S</maintainer>
   <license>BSD</license>
   <buildtool_depend>catkin</buildtool_depend>
 
