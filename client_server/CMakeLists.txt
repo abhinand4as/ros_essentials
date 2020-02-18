@@ -28,7 +28,7 @@ generate_messages(DEPENDENCIES std_msgs)
 ## Declare a catkin package
 catkin_package()
 
-
+include_directories(include ${catkin_INCLUDE_DIRS})
 add_executable(add_two_ints_server src/server_template.cpp)
 target_link_libraries(add_two_ints_server ${catkin_LIBRARIES})
 

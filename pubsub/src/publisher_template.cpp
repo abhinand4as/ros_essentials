@@ -67,7 +67,7 @@ int main(int argc, char **argv)
     string_pub.publish(msg);
     point_pub.publish(point);
 
-    ROS_INFO("publishing ...");
+    ROS_INFO_ONCE("publishing ...");
 
     ros::spinOnce();
 
