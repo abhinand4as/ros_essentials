@@ -39,6 +39,7 @@
 #include "ros/ros.h"
 #include "std_msgs/String.h"
 #include "geometry_msgs/Point.h"
+#include "pubsub/MsgTemplate.h"             //custom message type(/devel/include/pubsub/MsgTemplate.h)
 
 int main(int argc, char **argv)
 {
@@ -51,23 +52,29 @@ int main(int argc, char **argv)
 
   ros::Publisher point_pub = n.advertise<geometry_msgs::Point>("pubsub/point", 1000);
 
+  ros::Publisher msg_pub = n.advertise<pubsub::MsgTemplate>("pubsub/msg", 1000);
+
   ros::Rate loop_rate(10); //10 Hz
 
   while (ros::ok()) {
     
-    std_msgs::String msg;
+    std_msgs::String string;
     geometry_msgs::Point point;
+    pubsub::MsgTemplate msg;
 
 
-    msg.data = "hello world";
+    string.data = "hello world";
     point.x = 1.0;
     point.y = 3.4;
     point.z = 2.5;
+    msg.id = 1;
+    msg.data = "custom message: bye";
 
-    string_pub.publish(msg);
+    string_pub.publish(string);
     point_pub.publish(point);
+    msg_pub.publish(msg);
 
-    ROS_INFO("publishing ...");
+    ROS_INFO_ONCE("publishing ...");
 
     ros::spinOnce();
 

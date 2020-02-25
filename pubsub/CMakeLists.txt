@@ -5,12 +5,18 @@ project(pubsub)
 # add_compile_options(-std=c++11)
 
 ## Find catkin and any catkin packages
-find_package(catkin REQUIRED COMPONENTS roscpp rospy std_msgs)
+find_package(catkin REQUIRED COMPONENTS
+ roscpp 
+ rospy 
+ std_msgs 
+ message_generation
+)
 
 ## Declare ROS messages and services
+add_message_files(FILES MsgTemplate.msg)
 
 ## Generate added messages and services
-#generate_messages(DEPENDENCIES std_msgs)
+generate_messages(DEPENDENCIES std_msgs)
 
 ## Declare a catkin package
 catkin_package()

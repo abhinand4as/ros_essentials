@@ -1,0 +1,14 @@
+<launch>
+    <arg name="topic1"/>
+
+    <!--rosparam command="load" file="$(find pubsub)/config/config.yaml" /-->
+    <node pkg="pubsub" type="publisher" name="publisher_template" output="screen" launch-prefix="gnome-terminal --">
+        <!--remap from="pubsub/string" to="pubsub/str"/-->
+    </node>
+    <node pkg="pubsub" type="subscriber" name="subscriber_template" output="screen" launch-prefix="gnome-terminal --">
+        <param name="topic" value="$(arg topic1)"/>
+    </node>
+</launch>   
+
+<!-- gnome-terminal  : run a node in new terminal -->
+
