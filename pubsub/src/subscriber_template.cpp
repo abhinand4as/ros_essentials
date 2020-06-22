@@ -68,11 +68,13 @@ int main(int argc, char **argv)
     spinner.start();
 
     std::string _topic;
-    if(n.getParam("topic", _topic)) {
-    ROS_INFO_STREAM("_TOPIC: " << _topic);
 
-    ros::Subscriber string_sub = n.subscribe(_topic, 1000, stringCallback);
+    if(n.getParam("topic", _topic)) {
+        ROS_INFO_STREAM("_TOPIC: " << _topic);
+
+        ros::Subscriber string_sub = n.subscribe(_topic, 1000, stringCallback);
     }
+
     ros::Subscriber point_sub = n.subscribe("pubsub/point", 1000, pointCallback);
     ros::Subscriber msg_sub = n.subscribe("pubsub/msg", 1000, msgCallback);
 

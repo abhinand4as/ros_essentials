@@ -26,6 +26,8 @@ include_directories(include ${catkin_INCLUDE_DIRS})
 
 add_executable(publisher src/publisher_template.cpp)
 target_link_libraries(publisher ${catkin_LIBRARIES})
+add_dependencies(publisher ${pubsub_EXPORTED_TARGETS})
 
 add_executable(subscriber src/subscriber_template.cpp)
 target_link_libraries(subscriber ${catkin_LIBRARIES})
+add_dependencies(subscriber ${pubsub_EXPORTED_TARGETS})

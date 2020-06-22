@@ -21,7 +21,6 @@ add_service_files(
 )
 
 
-
 ## Generate added messages and services
 generate_messages(DEPENDENCIES std_msgs)
 
@@ -31,6 +30,8 @@ catkin_package()
 include_directories(include ${catkin_INCLUDE_DIRS})
 add_executable(add_two_ints_server src/server_template.cpp)
 target_link_libraries(add_two_ints_server ${catkin_LIBRARIES})
+add_dependencies(add_two_ints_server ${client_server_EXPORTED_TARGETS})
 
 add_executable(add_two_ints_client src/client_template.cpp)
 target_link_libraries(add_two_ints_client ${catkin_LIBRARIES})
+add_dependencies(add_two_ints_client ${client_server_EXPORTED_TARGETS})
